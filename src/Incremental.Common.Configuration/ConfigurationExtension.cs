@@ -41,7 +41,7 @@ namespace Incremental.Common.Configuration
         /// <param name="service"></param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <returns></returns>
-        public static ILogger LoadLogger(IConfiguration configuration, string service)
+        public static ILogger LoadLogger(IConfiguration configuration)
         {
             var environment = $"{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}";
             
