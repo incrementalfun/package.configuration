@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Amazon;
 using Amazon.CloudWatchLogs;
 using Amazon.Runtime;
@@ -38,6 +39,7 @@ namespace Incremental.Common.Configuration
         /// </summary>
         /// <param name="configuration"></param>
         /// <param name="service"></param>
+        /// <exception cref="ArgumentNullException"></exception>
         /// <returns></returns>
         public static ILogger LoadLogger(IConfiguration configuration, string service)
         {
@@ -45,10 +47,9 @@ namespace Incremental.Common.Configuration
             
             var cloudWatchSink = new CloudWatchSinkOptions
             {
-                LogGroupName = "incremental",
-                LogStreamNameProvider = new ConfigurableLogStreamNameProvider($"{service}#{environment}", false, false),
-                CreateLogGroup = true,
-                LogGroupRetentionPolicy = LogGroupRetentionPolicy.OneWeek,
+                LogGroupName = $"{configuration["LOG_GROUP_NAME"]}#{environment}",
+                LogStreamNameProvider = new ConfigurableLogStreamNameProvider($"{Assembly.GetCallingAssembly().GetName().Name}", false, false),
+                CreateLogGroup = false,
                 TextFormatter = new CompactJsonFormatter(),
                 MinimumLogEventLevel = environment == "Development" ? LogEventLevel.Debug : LogEventLevel.Information
             };
