@@ -4,6 +4,7 @@ using Amazon.CloudWatchLogs;
 using Amazon.Runtime;
 using Microsoft.Extensions.Configuration;
 using Serilog;
+using Serilog.Events;
 using Serilog.Exceptions;
 using Serilog.Formatting.Compact;
 using Serilog.Sinks.AwsCloudWatch;
@@ -48,7 +49,8 @@ namespace Incremental.Common.Configuration
                 LogStreamNameProvider = new ConfigurableLogStreamNameProvider($"{service}#{environment}", false, false),
                 CreateLogGroup = true,
                 LogGroupRetentionPolicy = LogGroupRetentionPolicy.OneWeek,
-                TextFormatter = new CompactJsonFormatter()
+                TextFormatter = new CompactJsonFormatter(),
+                MinimumLogEventLevel = environment == "Development" ? LogEventLevel.Debug : LogEventLevel.Information
             };
             
             var client = new AmazonCloudWatchLogsClient(new BasicAWSCredentials(configuration["AWS_ACCESS_KEY"], configuration["AWS_SECRET_KEY"]), RegionEndpoint.EUWest1);
