@@ -1,4 +1,5 @@
 ﻿using System;
+using Amazon;
 using Amazon.CloudWatchLogs;
 using Amazon.Runtime;
 using Microsoft.Extensions.Configuration;
@@ -48,7 +49,7 @@ namespace Incremental.Common.Configuration
                 LogGroupRetentionPolicy = LogGroupRetentionPolicy.OneWeek
             };
             
-            var client = new AmazonCloudWatchLogsClient(new BasicAWSCredentials(configuration["AWS_ACCESS_KEY"], configuration["AWS_SECRET_KEY"]));
+            var client = new AmazonCloudWatchLogsClient(new BasicAWSCredentials(configuration["AWS_ACCESS_KEY"], configuration["AWS_SECRET_KEY"]), RegionEndpoint.EUWest1);
 
             var loggerConf = new LoggerConfiguration()
                 .Enrich.FromLogContext()
