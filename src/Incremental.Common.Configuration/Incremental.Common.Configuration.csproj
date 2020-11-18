@@ -1,16 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFramework>net5.0</TargetFramework>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
-        <PackageVersion>1.0.1</PackageVersion>
+        <PackageVersion>1.1.0</PackageVersion>
         <PackageId>Incremental.Common.Configuration</PackageId>
         <Title>Common Configuration</Title>
         <Authors>Lucas Maximiliano Marino</Authors>
         <PackageProjectUrl>https://github.com/incrementalspace/package.configuration</PackageProjectUrl>
         <RepositoryUrl>https://github.com/incrementalspace/package.configuration</RepositoryUrl>
         <Copyright>Copyright © Lucas Maximiliano Marino 2020</Copyright>
+        <LangVersion>9</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
@@ -19,7 +20,8 @@
 
     <ItemGroup>
         <PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
-        <PackageReference Include="Serilog.Exceptions" Version="5.6.0" />
+        <PackageReference Include="Serilog.Exceptions" Version="5.7.0" />
+        <PackageReference Include="Serilog.Sinks.AwsCloudWatch" Version="4.0.161" />
         <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     </ItemGroup>
 
