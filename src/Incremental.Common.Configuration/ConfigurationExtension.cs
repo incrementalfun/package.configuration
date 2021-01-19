@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Serilog;
 using Serilog.Events;
 using Serilog.Exceptions;
+using Serilog.Exceptions.Core;
+using Serilog.Exceptions.EntityFrameworkCore.Destructurers;
 using Serilog.Formatting.Compact;
 using Serilog.Sinks.AwsCloudWatch;
 using Serilog.Sinks.AwsCloudWatch.LogStreamNameProvider;
@@ -38,7 +40,6 @@ namespace Incremental.Common.Configuration
         /// Creates a logger using Serilog.
         /// </summary>
         /// <param name="configuration"></param>
-        /// <param name="service"></param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <returns></returns>
         public static ILogger LoadLogger(IConfiguration configuration)
@@ -58,7 +59,9 @@ namespace Incremental.Common.Configuration
 
             var loggerConf = new LoggerConfiguration()
                 .Enrich.FromLogContext()
-                .Enrich.WithExceptionDetails()
+                .Enrich.WithExceptionDetails(new DestructuringOptionsBuilder()
+                    .WithDefaultDestructurers()
+                    .WithDestructurers(new[] { new DbUpdateExceptionDestructurer() }))
                 .WriteTo.AmazonCloudWatch(cloudWatchSink, client);
 
             if (environment == "Development")

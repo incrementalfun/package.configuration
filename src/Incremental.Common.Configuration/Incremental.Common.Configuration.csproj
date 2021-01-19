@@ -2,15 +2,15 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-        <GenerateDocumentationFile>True</GenerateDocumentationFile>
-        <PackageVersion>1.1.5</PackageVersion>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <PackageVersion>1.1.2</PackageVersion>
         <PackageId>Incremental.Common.Configuration</PackageId>
         <Title>Common Configuration</Title>
         <Authors>Lucas Maximiliano Marino</Authors>
-        <PackageProjectUrl>https://github.com/incrementalspace/package.configuration</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/incrementalspace/package.configuration</RepositoryUrl>
-        <Copyright>Copyright © Lucas Maximiliano Marino 2020</Copyright>
+        <PackageProjectUrl>https://github.com/incrementalfun/package.configuration</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/incrementalfun/package.configuration</RepositoryUrl>
+        <Copyright>Copyright © Lucas Maximiliano Marino 2021</Copyright>
         <LangVersion>9</LangVersion>
     </PropertyGroup>
 
@@ -20,7 +20,8 @@
 
     <ItemGroup>
         <PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
-        <PackageReference Include="Serilog.Exceptions" Version="5.7.0" />
+        <PackageReference Include="Serilog.Exceptions" Version="6.0.0" />
+        <PackageReference Include="Serilog.Exceptions.EntityFrameworkCore" Version="6.0.0" />
         <PackageReference Include="Serilog.Sinks.AwsCloudWatch" Version="4.0.161" />
         <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     </ItemGroup>
