@@ -4,7 +4,7 @@
         <TargetFramework>net5.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <PackageVersion>1.1.2</PackageVersion>
+        <PackageVersion>1.1.6</PackageVersion>
         <PackageId>Incremental.Common.Configuration</PackageId>
         <Title>Common Configuration</Title>
         <Authors>Lucas Maximiliano Marino</Authors>
