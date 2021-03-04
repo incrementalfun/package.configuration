@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
 using Amazon;
 using Amazon.CloudWatchLogs;
@@ -24,11 +25,13 @@ namespace Incremental.Common.Configuration
         ///     Builds a logger using Serilog.
         /// </summary>
         /// <param name="configuration">
-        ///     <see cref="IConfiguration" />
+        ///     <see cref="IConfiguration" />. Optional.
         /// </param>
         /// <returns>An <see cref="ILogger" /></returns>
-        public static ILogger BuildLogger(IConfiguration configuration)
+        public static ILogger BuildLogger(IConfiguration? configuration = default)
         {
+            configuration ??= CommonConfigurationExtensions.BuildConfiguration(Directory.GetCurrentDirectory());
+
             var environment = $"{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}";
 
             var cloudWatchSink = new CloudWatchSinkOptions
