@@ -25,7 +25,7 @@ namespace Incremental.Common.Configuration
         /// Builds an IConfiguration.
         /// </summary>
         /// <param name="directory">Directory of the project.</param>
-        /// <returns></returns>
+        /// <returns>An <see cref="IConfiguration"/>.</returns>
         public static IConfiguration BuildConfiguration(string? directory)
         {
             return new ConfigurationBuilder()
