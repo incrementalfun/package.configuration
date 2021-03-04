@@ -18,7 +18,7 @@ namespace Incremental.Common.Configuration
     /// <summary>
     /// Common set of configuration settings.
     /// </summary>
-    public static class ConfigurationExtension
+    public static class CommonConfigurationExtensions
     {
         /// <summary>
         /// Builds an IConfiguration.
