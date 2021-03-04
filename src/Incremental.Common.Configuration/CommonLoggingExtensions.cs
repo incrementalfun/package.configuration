@@ -21,15 +21,14 @@ namespace Incremental.Common.Configuration
     public static class CommonLoggingExtensions
     {
         /// <summary>
-        /// Creates a logger using Serilog.
+        /// Builds a logger using Serilog.
         /// </summary>
-        /// <param name="configuration"></param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <returns></returns>
-        public static ILogger LoadLogger(IConfiguration configuration)
+        /// <param name="configuration"><see cref="IConfiguration"/></param>
+        /// <returns>An <see cref="ILogger"/></returns>
+        public static ILogger BuildLogger(IConfiguration configuration)
         {
             var environment = $"{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}";
-            
+
             var cloudWatchSink = new CloudWatchSinkOptions
             {
                 LogGroupName = $"{configuration["LOG_GROUP_NAME"]}#{environment}",
@@ -38,14 +37,15 @@ namespace Incremental.Common.Configuration
                 TextFormatter = new CompactJsonFormatter(),
                 MinimumLogEventLevel = environment == "Development" ? LogEventLevel.Debug : LogEventLevel.Information
             };
-            
-            var client = new AmazonCloudWatchLogsClient(new BasicAWSCredentials(configuration["AWS_ACCESS_KEY"], configuration["AWS_SECRET_KEY"]), RegionEndpoint.EUWest1);
+
+            var client = new AmazonCloudWatchLogsClient(new BasicAWSCredentials(configuration["AWS_ACCESS_KEY"], configuration["AWS_SECRET_KEY"]),
+                RegionEndpoint.EUWest1);
 
             var loggerConf = new LoggerConfiguration()
                 .Enrich.FromLogContext()
                 .Enrich.WithExceptionDetails(new DestructuringOptionsBuilder()
                     .WithDefaultDestructurers()
-                    .WithDestructurers(new[] { new DbUpdateExceptionDestructurer() }))
+                    .WithDestructurers(new[] {new DbUpdateExceptionDestructurer()}))
                 .WriteTo.AmazonCloudWatch(cloudWatchSink, client);
 
             if (environment == "Development")
@@ -55,7 +55,12 @@ namespace Incremental.Common.Configuration
             }
             else
             {
-                loggerConf.MinimumLevel.Warning();
+                loggerConf.MinimumLevel.Information();
+            }
+
+            if (!string.IsNullOrWhiteSpace(configuration["ENABLE_CONSOLE_LOGS"]))
+            {
+                loggerConf.WriteTo.Console();
             }
 
             return loggerConf.CreateLogger();
