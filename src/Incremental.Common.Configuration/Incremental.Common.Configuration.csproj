@@ -9,6 +9,7 @@
         <PackageProjectUrl>https://github.com/incrementalfun/package.configuration</PackageProjectUrl>
         <RepositoryUrl>https://github.com/incrementalfun/package.configuration</RepositoryUrl>
         <Copyright>Copyright © Lucas Maximiliano Marino 2021</Copyright>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
