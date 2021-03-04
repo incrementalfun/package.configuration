@@ -16,15 +16,17 @@ using Serilog.Sinks.AwsCloudWatch.LogStreamNameProvider;
 namespace Incremental.Common.Configuration
 {
     /// <summary>
-    /// Common set of logging settings.
+    ///     Common set of logging settings.
     /// </summary>
     public static class CommonLoggingExtensions
     {
         /// <summary>
-        /// Builds a logger using Serilog.
+        ///     Builds a logger using Serilog.
         /// </summary>
-        /// <param name="configuration"><see cref="IConfiguration"/></param>
-        /// <returns>An <see cref="ILogger"/></returns>
+        /// <param name="configuration">
+        ///     <see cref="IConfiguration" />
+        /// </param>
+        /// <returns>An <see cref="ILogger" /></returns>
         public static ILogger BuildLogger(IConfiguration configuration)
         {
             var environment = $"{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}";
@@ -58,10 +60,7 @@ namespace Incremental.Common.Configuration
                 loggerConf.MinimumLevel.Information();
             }
 
-            if (!string.IsNullOrWhiteSpace(configuration["ENABLE_CONSOLE_LOGS"]))
-            {
-                loggerConf.WriteTo.Console();
-            }
+            if (!string.IsNullOrWhiteSpace(configuration["ENABLE_CONSOLE_LOGS"])) loggerConf.WriteTo.Console();
 
             return loggerConf.CreateLogger();
         }
