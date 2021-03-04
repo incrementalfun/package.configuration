@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
 using Amazon;
 using Amazon.CloudWatchLogs;
@@ -25,10 +26,10 @@ namespace Incremental.Common.Configuration
         /// </summary>
         /// <param name="directory">Directory of the project.</param>
         /// <returns></returns>
-        public static IConfiguration LoadConfiguration(string directory)
+        public static IConfiguration BuildConfiguration(string? directory)
         {
             return new ConfigurationBuilder()
-                .SetBasePath(directory)
+                .SetBasePath(directory ?? Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", false, true)
                 .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", true)
                 .AddJsonFile($"appsettings.Local.json", true)
