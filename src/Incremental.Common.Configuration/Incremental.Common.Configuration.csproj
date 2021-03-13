@@ -4,6 +4,7 @@
         <TargetFramework>net5.0</TargetFramework>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <Title>Common Configuration</Title>
+        <Description>SDK to interact with server.library service.</Description>
         <Authors>Lucas Maximiliano Marino</Authors>
         <PackageProjectUrl>https://github.com/incrementalfun/package.configuration</PackageProjectUrl>
         <RepositoryUrl>https://github.com/incrementalfun/package.configuration</RepositoryUrl>

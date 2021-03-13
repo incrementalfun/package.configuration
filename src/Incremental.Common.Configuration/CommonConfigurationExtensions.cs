@@ -30,11 +30,16 @@ namespace Incremental.Common.Configuration
         /// <param name="builder">
         ///     <see cref="IConfigurationBuilder" />
         /// </param>
+        /// <param name="configurations"></param>
         /// <returns>An <see cref="IConfigurationBuilder" /></returns>
-        public static IConfigurationBuilder AddCommonConfiguration(this IConfigurationBuilder builder)
+        public static IConfigurationBuilder AddCommonConfiguration(this IConfigurationBuilder builder, Action<IConfigurationBuilder>? configurations = default)
         {
-            return builder
-                .AddJsonFile("appsettings.Local.json", true);
+            configurations?.Invoke(builder);
+            
+            builder.AddJsonFile("appsettings.Local.json", true);
+            builder.AddEnvironmentVariables();
+            
+            return builder;
         }
     }
 }
