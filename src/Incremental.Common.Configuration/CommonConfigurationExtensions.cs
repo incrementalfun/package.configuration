@@ -18,7 +18,7 @@ namespace Incremental.Common.Configuration
             return new ConfigurationBuilder()
                 .SetBasePath(directory)
                 .AddJsonFile("appsettings.json", false, true)
-                .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", true)
+                .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Unknown"}.json", true)
                 .AddJsonFile("appsettings.Local.json", true)
                 .AddEnvironmentVariables()
                 .Build();
