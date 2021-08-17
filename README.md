@@ -1,2 +1,2 @@
 # package.configuration
-Configuration nuget for incremental.space
+Common configuration utilities.
