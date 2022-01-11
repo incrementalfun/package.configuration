@@ -6,7 +6,7 @@ namespace Incremental.Common.Configuration
     /// <summary>
     ///     Common set of configuration settings.
     /// </summary>
-    public static class ConfigurationBuilder
+    public static class ConfigurationBuilderExtensions
     {
         /// <summary>
         ///     Adds common configuration sources to the <see cref="IConfigurationBuilder" />.
